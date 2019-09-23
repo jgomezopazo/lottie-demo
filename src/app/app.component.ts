@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { ConnectionService } from 'ng-connection-service';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html' 
+    templateUrl: './app.component.html'
 })
 
 export class AppComponent {
@@ -11,8 +12,23 @@ export class AppComponent {
     private anim: any;
     private animationSpeed: number = 1;
 
-    constructor() {
+    status = 'ONLINE';
+    isConnected = true;
 
+    constructor(private connectionService: ConnectionService) {
+
+        this.connectionService.monitor().subscribe(isConnected => {
+            this.isConnected = isConnected;
+            if (this.isConnected) {
+                this.status = "ONLINE";
+            }
+            else {
+                this.status = "OFFLINE";
+            }
+            console.log("STATUS: ", this.status);
+        })
+
+        
 
         this.lottieConfig = {
             path: 'assets/astronauta.json',
