@@ -9,6 +9,8 @@ import { ConnectionService } from 'ng-connection-service';
 export class AppComponent {
 
     public lottieConfig: Object;
+    public lottieConfigDisconnected: Object;
+
     private anim: any;
     private animationSpeed: number = 1;
 
@@ -28,13 +30,18 @@ export class AppComponent {
             console.log("STATUS: ", this.status);
         })
 
-        
-
         this.lottieConfig = {
             path: 'assets/astronauta.json',
             autoplay: true,
             loop: true
         };
+
+        this.lottieConfigDisconnected = {
+            path: 'assets/disconnected.json',
+            autoplay: true,
+            loop: true
+        };
+
     }
 
     handleAnimation(anim: any) {
